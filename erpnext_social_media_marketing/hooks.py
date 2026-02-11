@@ -9,7 +9,7 @@ after_install = "erpnext_social_media_marketing.install.after_install"
 
 doc_events = {
     "Social Media Interaction": {
-        "after_insert": "erpnext_social_media_marketing.doctype.social_media_interaction.social_media_interaction.create_timeline_entry"
+        "after_insert": "erpnext_social_media_marketing.erpnext_social_media_marketing.doctype.social_media_interaction.social_media_interaction.create_timeline_entry"
     }
 }
 
