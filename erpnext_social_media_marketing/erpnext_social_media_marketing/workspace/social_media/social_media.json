@@ -1,0 +1,9 @@
+{
+  "doctype": "Workspace",
+  "title": "Social Media",
+  "module": "ERPNext Social Media Marketing",
+  "public": 1,
+  "is_hidden": 0,
+  "icon": "share",
+  "content": "[]"
+}

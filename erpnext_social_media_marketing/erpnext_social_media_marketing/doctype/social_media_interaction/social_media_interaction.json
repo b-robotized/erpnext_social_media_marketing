@@ -1,0 +1,96 @@
+{
+  "doctype": "DocType",
+  "name": "Social Media Interaction",
+  "module": "ERPNext Social Media Marketing",
+  "custom": 0,
+  "is_submittable": 0,
+  "editable_grid": 1,
+  "autoname": "format:SMM-INT-{#####}",
+  "fields": [
+    {
+      "fieldname": "interaction_type",
+      "label": "Interaction Type",
+      "fieldtype": "Select",
+      "options": "Message\nComment\nLike",
+      "reqd": 1
+    },
+    {
+      "fieldname": "platform",
+      "label": "Platform",
+      "fieldtype": "Select",
+      "options": "LinkedIn\nX\nInstagram\nFacebook\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "direction",
+      "label": "Direction",
+      "fieldtype": "Select",
+      "options": "Incoming\nOutgoing",
+      "default": "Incoming",
+      "reqd": 1
+    },
+    {
+      "fieldname": "counterparty_handle",
+      "label": "Counterparty Handle",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "message_text",
+      "label": "Message",
+      "fieldtype": "Text Editor",
+      "reqd": 1
+    },
+    {
+      "fieldname": "message_datetime",
+      "label": "Message Datetime",
+      "fieldtype": "Datetime"
+    },
+    {
+      "fieldname": "message_url",
+      "label": "Message URL",
+      "fieldtype": "Data",
+      "options": "URL"
+    },
+    {
+      "fieldname": "external_id",
+      "label": "External ID",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "reference_doctype",
+      "label": "Reference DocType",
+      "fieldtype": "Link",
+      "options": "DocType",
+      "reqd": 1
+    },
+    {
+      "fieldname": "reference_name",
+      "label": "Reference Name",
+      "fieldtype": "Dynamic Link",
+      "options": "reference_doctype",
+      "reqd": 1
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    },
+    {
+      "role": "Sales User",
+      "read": 1,
+      "write": 1,
+      "create": 1
+    },
+    {
+      "role": "Sales Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ]
+}
