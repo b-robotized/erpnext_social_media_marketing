@@ -1,0 +1,8 @@
+.DS_Store
+*.pyc
+*.egg-info
+*.swp
+tags
+build/
+.pytest_cache/
+erpnext_social_media_marketing/public/dist

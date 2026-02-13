@@ -26,4 +26,4 @@ jobs:
 
       - name: Test with pytest
         run: |
-          pytest erpnext_social_media_marketing/erpnext_social_media_marketing/tests
+          pytest erpnext_social_media_marketing/erpnext_social_media_marketing/erpnext_social_media_marketing/tests

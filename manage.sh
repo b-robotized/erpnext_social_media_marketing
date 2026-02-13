@@ -22,6 +22,39 @@ show_help() {
     echo ""
 }
 
+# Cleanup function
+cleanup() {
+    echo ""
+    echo "=========================================="
+    echo "Stopping Docker containers..."
+    echo "=========================================="
+    docker compose down
+
+    echo ""
+    echo "=========================================="
+    echo "Cleaning up Docker volumes..."
+    echo "=========================================="
+    for vol in "${VOLUMES[@]}"; do
+        if docker volume inspect "$vol" >/dev/null 2>&1; then
+            docker volume rm "$vol"
+            echo "✓ Removed volume: $vol"
+        else
+            echo "- Volume not found (skipped): $vol"
+        fi
+    done
+
+    echo ""
+    echo "=========================================="
+    echo "Removing Docker image..."
+    echo "=========================================="
+    if docker image inspect "$IMAGE_NAME" >/dev/null 2>&1; then
+        docker rmi "$IMAGE_NAME"
+        echo "✓ Removed image: $IMAGE_NAME"
+    else
+        echo "- Image not found (skipped): $IMAGE_NAME"
+    fi
+}
+
 # Parse arguments
 CLEAN_ONLY=false
 
@@ -47,34 +80,8 @@ done
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPT_DIR/docker" || { echo "Error: docker directory not found"; exit 1; }
 
-echo "=========================================="
-echo "Stopping Docker containers..."
-echo "=========================================="
-docker compose down
-
-echo ""
-echo "=========================================="
-echo "Cleaning up Docker volumes..."
-echo "=========================================="
-for vol in "${VOLUMES[@]}"; do
-    if docker volume inspect "$vol" >/dev/null 2>&1; then
-        docker volume rm "$vol"
-        echo "✓ Removed volume: $vol"
-    else
-        echo "- Volume not found (skipped): $vol"
-    fi
-done
-
-echo ""
-echo "=========================================="
-echo "Removing Docker image..."
-echo "=========================================="
-if docker image inspect "$IMAGE_NAME" >/dev/null 2>&1; then
-    docker rmi "$IMAGE_NAME"
-    echo "✓ Removed image: $IMAGE_NAME"
-else
-    echo "- Image not found (skipped): $IMAGE_NAME"
-fi
+# Perform initial cleanup to ensure fresh state
+cleanup
 
 # Exit if clean-only mode
 if [ "$CLEAN_ONLY" = true ]; then
@@ -82,6 +89,9 @@ if [ "$CLEAN_ONLY" = true ]; then
     echo "Cleanup complete. Exiting."
     exit 0
 fi
+
+# Register trap to ensure cleanup happens on exit
+trap cleanup EXIT INT TERM
 
 echo ""
 echo "=========================================="
@@ -93,6 +103,6 @@ echo ""
 echo "=========================================="
 echo "Following configurator logs..."
 echo "=========================================="
-echo "Press Ctrl+C to stop following logs (containers will keep running)."
+echo "Press Ctrl+C to stop following logs (Cleanup will run automatically)."
 echo ""
 docker compose logs -f configurator

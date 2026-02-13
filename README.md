@@ -17,7 +17,7 @@ These tests check the Python code logic in isolation. They are fast and run loca
 **Run locally:**
 ```bash
 docker run --rm -v $(pwd):/app -w /app python:3.14-slim \
-    bash -c "pip install -e . pytest && pytest erpnext_social_media_marketing/tests"
+    bash -c "pip install -e . pytest && pytest erpnext_social_media_marketing/erpnext_social_media_marketing/erpnext_social_media_marketing/tests"
 ```
 
 ### 2. Integration Tests (Installation Verification)
