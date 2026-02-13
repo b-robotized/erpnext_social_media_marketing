@@ -1,7 +1,7 @@
 [project]
 name = "erpnext_social_media_marketing"
 authors = [
-    { name = "b»robotized group", email = "erp-devs@b-robotized.com"}
+    { name = "b»robotized group", email = "erp-devs@b-robotized.com"},
     { name = "Dr. Denis Stogl", email = "dr.denis@b-robotized.com"}
 ]
 description = "CRM-integrated Social Media tracking for ERPNext"
